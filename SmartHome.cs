@@ -47,6 +47,26 @@ namespace SmartHome {
 
     namespace Classes {
 
+         class CreateRoom {
+            private static Room masterBedRoom = new MasterBedRoom(5);
+            private static Room secondaryBedRoom = new MasterBedRoom(5);
+            private static Room kitchen = new Kitchen(5);
+            
+            private static Room[] roomList = {masterBedRoom,secondaryBedRoom,kitchen};
+            
+            public static Room[] Create() {
+                return roomList;
+            }
+        }
+        
+        
+        class RoomList {
+            
+            public static Room[] GetRooms() {
+                return CreateRoom.Create();
+            }
+        }
+        
         class Home {
             
             private Room[] room;
@@ -571,12 +591,9 @@ namespace SmartHome {
             
             WelcomeMessage.Message();
            
+            Room[] roomList = RoomList.GetRooms();
+            Home home = new Home(roomList);
             
-            Room masterBedRoom = new MasterBedRoom(5);
-            Room secondaryBedRoom = new SecondaryBedRoom(5);
-            Room kitchen = new Kitchen(5);
-
-            Home home = new Home(masterBedRoom,secondaryBedRoom,kitchen);
             Room room = null;   //Master,Secondary,Kitchan
             
             int choice = -1;
